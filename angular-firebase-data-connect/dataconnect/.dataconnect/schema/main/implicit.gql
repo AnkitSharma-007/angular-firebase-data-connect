@@ -1,0 +1,6 @@
+extend type City {
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "City", purpose: IMPLICIT_KEY_FIELD)
+}
+extend type Employee {
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Employee", purpose: IMPLICIT_KEY_FIELD)
+}

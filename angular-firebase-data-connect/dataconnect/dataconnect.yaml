@@ -1,0 +1,11 @@
+specVersion: "v1alpha"
+serviceId: "ng-data-connect"
+location: "asia-south1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "ng-data-connect-db"
+      cloudSql:
+        instanceId: "ng-data-connect-sql"
+connectorDirs: ["./default-connector"]

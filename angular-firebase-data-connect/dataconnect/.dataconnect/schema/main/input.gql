@@ -1,0 +1,56 @@
+scalar City_Key
+scalar Employee_Key
+input City_Data {
+  id: UUID
+  id_expr: UUID_Expr
+  cityName: String
+  cityName_expr: String_Expr
+}
+input City_Filter {
+  _and: [City_Filter!]
+  _not: City_Filter
+  _or: [City_Filter!]
+  id: UUID_Filter
+  cityName: String_Filter
+}
+input City_ListFilter {
+  count: Int_Filter = {gt:0}
+  exist: City_Filter
+}
+input City_Order {
+  id: OrderDirection
+  cityName: OrderDirection
+}
+input Employee_Data {
+  id: UUID
+  id_expr: UUID_Expr
+  city: String
+  city_expr: String_Expr
+  department: String
+  department_expr: String_Expr
+  gender: String
+  gender_expr: String_Expr
+  name: String
+  name_expr: String_Expr
+}
+input Employee_Filter {
+  _and: [Employee_Filter!]
+  _not: Employee_Filter
+  _or: [Employee_Filter!]
+  id: UUID_Filter
+  city: String_Filter
+  department: String_Filter
+  gender: String_Filter
+  name: String_Filter
+}
+input Employee_ListFilter {
+  count: Int_Filter = {gt:0}
+  exist: Employee_Filter
+}
+input Employee_Order {
+  id: OrderDirection
+  city: OrderDirection
+  department: OrderDirection
+  gender: OrderDirection
+  name: OrderDirection
+}

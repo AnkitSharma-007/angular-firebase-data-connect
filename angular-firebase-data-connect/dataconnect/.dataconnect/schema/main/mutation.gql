@@ -1,0 +1,66 @@
+extend type Mutation {
+  """
+  Insert a single City into the table. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  city_insert(data: City_Data!): City_Key! @fdc_generated(from: "City", purpose: INSERT_SINGLE)
+  """
+  Insert a single Employee into the table. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  employee_insert(data: Employee_Data!): Employee_Key! @fdc_generated(from: "Employee", purpose: INSERT_SINGLE)
+  """
+  Insert City entries into the table. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  city_insertMany(data: [City_Data!]!): [City_Key!]! @fdc_generated(from: "City", purpose: INSERT_MULTIPLE)
+  """
+  Insert Employee entries into the table. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  employee_insertMany(data: [Employee_Data!]!): [Employee_Key!]! @fdc_generated(from: "Employee", purpose: INSERT_MULTIPLE)
+  """
+  Insert or update a single City into the table, based on the primary key. Returns the key of the newly inserted City.
+  """
+  city_upsert(data: City_Data!): City_Key! @fdc_generated(from: "City", purpose: UPSERT_SINGLE)
+  """
+  Insert or update a single Employee into the table, based on the primary key. Returns the key of the newly inserted Employee.
+  """
+  employee_upsert(data: Employee_Data!): Employee_Key! @fdc_generated(from: "Employee", purpose: UPSERT_SINGLE)
+  """
+  Insert or update City entries into the table, based on the primary key. Returns the key of the newly inserted City.
+  """
+  city_upsertMany(data: [City_Data!]): [City_Key!]! @fdc_generated(from: "City", purpose: UPSERT_MULTIPLE)
+  """
+  Insert or update Employee entries into the table, based on the primary key. Returns the key of the newly inserted Employee.
+  """
+  employee_upsertMany(data: [Employee_Data!]): [Employee_Key!]! @fdc_generated(from: "Employee", purpose: UPSERT_MULTIPLE)
+  """
+  Update a single City based on `id` or `key`, setting columns specified in `data`. Returns `null` if not found.
+  """
+  city_update(id: UUID, key: City_Key, data: City_Data!): City_Key @fdc_generated(from: "City", purpose: UPDATE_SINGLE)
+  """
+  Update a single Employee based on `id` or `key`, setting columns specified in `data`. Returns `null` if not found.
+  """
+  employee_update(id: UUID, key: Employee_Key, data: Employee_Data!): Employee_Key @fdc_generated(from: "Employee", purpose: UPDATE_SINGLE)
+  """
+  Update City entries matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  city_updateMany(where: City_Filter, all: Boolean = false, data: City_Data!): Int! @fdc_generated(from: "City", purpose: UPDATE_MULTIPLE)
+  """
+  Update Employee entries matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  employee_updateMany(where: Employee_Filter, all: Boolean = false, data: Employee_Data!): Int! @fdc_generated(from: "Employee", purpose: UPDATE_MULTIPLE)
+  """
+  Delete a single City based on `id` or `key` and return its key (or `null` if not found).
+  """
+  city_delete(id: UUID, key: City_Key): City_Key @fdc_generated(from: "City", purpose: DELETE_SINGLE)
+  """
+  Delete a single Employee based on `id` or `key` and return its key (or `null` if not found).
+  """
+  employee_delete(id: UUID, key: Employee_Key): Employee_Key @fdc_generated(from: "Employee", purpose: DELETE_SINGLE)
+  """
+  Delete City entries matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  city_deleteMany(where: City_Filter, all: Boolean = false): Int! @fdc_generated(from: "City", purpose: DELETE_MULTIPLE)
+  """
+  Delete Employee entries matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  employee_deleteMany(where: Employee_Filter, all: Boolean = false): Int! @fdc_generated(from: "Employee", purpose: DELETE_MULTIPLE)
+}

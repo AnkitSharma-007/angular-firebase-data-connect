@@ -1,0 +1,18 @@
+extend type Query {
+  """
+  Look up a single City based on `id` or `key` and return selected fields (or `null` if not found).
+  """
+  city(id: UUID, key: City_Key): City @fdc_generated(from: "City", purpose: QUERY_SINGLE)
+  """
+  Look up a single Employee based on `id` or `key` and return selected fields (or `null` if not found).
+  """
+  employee(id: UUID, key: Employee_Key): Employee @fdc_generated(from: "Employee", purpose: QUERY_SINGLE)
+  """
+  List City entries in the table, optionally filtered by `where` conditions.
+  """
+  cities(where: City_Filter, orderBy: [City_Order!], limit: Int = 100): [City!]! @fdc_generated(from: "City", purpose: QUERY_MULTIPLE)
+  """
+  List Employee entries in the table, optionally filtered by `where` conditions.
+  """
+  employees(where: Employee_Filter, orderBy: [Employee_Order!], limit: Int = 100): [Employee!]! @fdc_generated(from: "Employee", purpose: QUERY_MULTIPLE)
+}

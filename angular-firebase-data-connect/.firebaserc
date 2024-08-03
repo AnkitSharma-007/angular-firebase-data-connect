@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "data-connect-demo-5015d"
+  },
+  "dataconnectEmulatorConfig": {
+    "postgres": {
+      "localConnectionString": "\t"
+    }
+  }
+}

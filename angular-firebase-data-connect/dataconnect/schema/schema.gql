@@ -1,0 +1,10 @@
+type Employee @table {
+  name: String!
+  city: String!
+  department: String!
+  gender: String!
+}
+
+type City @table {
+  cityName: String!
+}

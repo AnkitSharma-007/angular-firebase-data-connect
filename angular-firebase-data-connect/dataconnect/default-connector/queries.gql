@@ -1,0 +1,28 @@
+# # Example queries for a simple email app.
+
+query ListCities @auth(level: PUBLIC) {
+  cities {
+    id
+    cityName
+  }
+}
+
+query ListEmployees @auth(level: PUBLIC) {
+  employees {
+    id
+    name
+    gender
+    department
+    city
+  }
+}
+
+query ListEmployeeByID($uid: UUID) @auth(level: PUBLIC) {
+  employees(where: { id: { eq: $uid } }) {
+    id
+    name
+    gender
+    department
+    city
+  }
+}
