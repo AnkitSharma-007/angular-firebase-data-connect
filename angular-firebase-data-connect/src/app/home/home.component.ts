@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  inject,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { EmployeeService } from '../services/employee.service';
 import { Employee } from '../../models/employee';
 import { MatCardModule } from '@angular/material/card';
@@ -37,12 +31,19 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements AfterViewInit, OnDestroy {
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+export class HomeComponent implements OnDestroy {
+  private paginator!: MatPaginator;
+  private sort!: MatSort;
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
 
   private readonly employeeService = inject(EmployeeService);
   private readonly snackbarService = inject(SnackbarService);
@@ -62,7 +63,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.getEmployeeData();
   }
 
-  ngAfterViewInit() {
+  setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
