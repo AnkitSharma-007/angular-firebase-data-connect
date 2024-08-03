@@ -1,10 +1,10 @@
 export const environment = {
   firebaseConfig: {
-    apiKey: 'AIzaSyCcN6KZH-1EACW-Z4ZOwUg_OC2ZnG1TQVo',
+    apiKey: 'Your API Key',
     authDomain: 'data-connect-demo-5015d.firebaseapp.com',
-    projectId: 'data-connect-demo-5015d',
+    projectId: 'your-project-id',
     storageBucket: 'data-connect-demo-5015d.appspot.com',
-    messagingSenderId: '594743971939',
-    appId: '1:594743971939:web:277a2420257419053de856',
+    messagingSenderId: 'your-messaging-sender-id',
+    appId: 'Your App ID',
   },
 };
