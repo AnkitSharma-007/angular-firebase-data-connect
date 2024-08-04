@@ -42,7 +42,6 @@ export class EmployeeService {
       listEmployeeByIdRef({ uid: employeeId })
     );
 
-    console.log(data.employees[0]);
     return data.employees[0];
   }
 
@@ -51,7 +50,9 @@ export class EmployeeService {
     return data.cities;
   }
 
-  async deleteEmployee(employeeId: string) {
-    await executeMutation(deleteEmployeeRef({ id: employeeId }));
+  async deleteEmployee(employeeId: string | undefined) {
+    if (employeeId) {
+      await executeMutation(deleteEmployeeRef({ id: employeeId }));
+    }
   }
 }

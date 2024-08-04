@@ -76,10 +76,9 @@ export class HomeComponent implements OnDestroy {
     }
   }
 
-  deleteConfirm(employeeID: string) {
-    console.log('Employee ID : ', employeeID);
+  deleteConfirm(rowData: Employee) {
     const dialogRef = this.dialog.open(DeleteEmployeeComponent, {
-      data: employeeID,
+      data: rowData,
     });
 
     dialogRef

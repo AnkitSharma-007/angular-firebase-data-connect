@@ -1,31 +1,25 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EmployeeService } from '../services/employee.service';
 import { Employee } from '../../models/employee';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-delete-employee',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule, JsonPipe],
   templateUrl: './delete-employee.component.html',
   styleUrl: './delete-employee.component.scss',
 })
 export class DeleteEmployeeComponent {
-  private readonly employeeService = inject(EmployeeService);
-  // private readonly employeeId: string = Inject(MAT_DIALOG_DATA);
-
-  employeeData: Employee = {} as Employee;
-
-  constructor(@Inject(MAT_DIALOG_DATA) private readonly employeeId: string) {
-    console.log(this.employeeId);
-    this.employeeService.getEmployeeById(this.employeeId).then((data) => {
-      this.employeeData = data;
-    }, console.error);
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public employeeData: Employee,
+    private readonly employeeService: EmployeeService
+  ) {}
 
   confirmDelete(): void {
-    this.employeeService.deleteEmployee(this.employeeId);
+    this.employeeService.deleteEmployee(this.employeeData.id);
   }
 }
