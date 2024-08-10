@@ -2,6 +2,13 @@ mat-toolbar {
     background: #d7e3ff;
 }
 
-.example-spacer {
-    flex: 1 1 auto;
-}
+.spacer {
+    flex-grow: 1;
+  }
+  
+
+.user-avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }

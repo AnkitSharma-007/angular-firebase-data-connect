@@ -3,9 +3,29 @@
     <mat-icon aria-hidden="false" fontIcon="home_filled"></mat-icon>
     Home
   </button>
-  <span class="example-spacer"></span>
+  <span class="spacer"></span>
+
+  @if (appUser$ | async; as appUser ) {
   <button mat-button [routerLink]="['/employee/new']">
     <mat-icon fontIcon="person_add"></mat-icon>
     Add Employee
   </button>
+
+  <button mat-button [matMenuTriggerFor]="userMenu">
+    <img class="user-avatar" src="{{ appUser.photoURL }}" />
+    {{ appUser.displayName }}
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="userLogout()">
+      <mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+
+  } @else {
+  <button mat-button (click)="userLogin()">
+    <mat-icon aria-hidden="false" fontIcon="login"></mat-icon>Login
+  </button>
+  }
 </mat-toolbar>

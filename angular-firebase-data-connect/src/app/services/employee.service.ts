@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  executeMutation,
-  executeQuery,
-  subscribe,
-} from 'firebase/data-connect';
-
+import { executeMutation, executeQuery } from 'firebase/data-connect';
 import { Employee } from '../../models/employee';
 import {
   createEmployeeRef,
@@ -28,13 +23,8 @@ export class EmployeeService {
   }
 
   async getAllEmployees() {
-    const { data } = await executeQuery(listEmployeesRef()); // Use this line if you do not want subscribe.
+    const { data } = await executeQuery(listEmployeesRef());
     return data.employees;
-    // subscribe will immediately invoke the query if no execute was called on it previously.
-    // return subscribe(listEmployeesRef(), ({ data }) => {
-    //   console.log(data.employees);
-    //   return data.employees;
-    // });
   }
 
   async getEmployeeById(employeeId: string) {
