@@ -62,7 +62,7 @@
             <mat-label>City</mat-label>
             <mat-select placeholder="City" formControlName="city" required>
               <mat-option value=""> -- Select City -- </mat-option>
-              @for (city of cityList; track $index) {
+              @for (city of cityList$ | async; track $index ) {
               <mat-option value="{{ city.cityName }}">
                 {{ city.cityName }}
               </mat-option>

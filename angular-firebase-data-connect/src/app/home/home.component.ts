@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { EmployeeService } from '../services/employee.service';
 import { Employee } from '../../models/employee';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   private paginator!: MatPaginator;
   private sort!: MatSort;
 
@@ -59,7 +59,7 @@ export class HomeComponent implements OnDestroy {
   ];
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource();
 
-  constructor() {
+  ngOnInit(): void {
     this.getEmployeeData();
   }
 

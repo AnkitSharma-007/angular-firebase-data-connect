@@ -25,9 +25,7 @@ export class AuthService {
 
     localStorage.setItem('returnUrl', returnUrl);
 
-    return await signInWithPopup(auth, new GoogleAuthProvider()).then(
-      (credential) => this.appUser$.next(credential.user)
-    );
+    await signInWithPopup(auth, new GoogleAuthProvider());
   }
 
   async logout() {

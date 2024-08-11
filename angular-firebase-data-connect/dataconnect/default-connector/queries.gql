@@ -8,7 +8,7 @@ query ListCities @auth(level: PUBLIC) {
 }
 
 query ListEmployees @auth(level: PUBLIC) {
-  employees {
+  employees(orderBy: [{ name: ASC }]) {
     id
     name
     gender

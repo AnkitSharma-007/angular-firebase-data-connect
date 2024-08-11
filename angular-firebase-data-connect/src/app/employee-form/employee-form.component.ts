@@ -1,7 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { EmployeeForm } from '../../models/employee-form';
-import { City } from '../../models/city';
 import { EmployeeService } from '../services/employee.service';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SnackbarService } from '../services/snackbar.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee-form',
@@ -26,6 +26,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSelectModule,
     MatFormFieldModule,
     MatDividerModule,
+    AsyncPipe,
   ],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss',
@@ -36,26 +37,19 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   private readonly nonNullableFormBuilder = inject(NonNullableFormBuilder);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly snackbarService = inject(SnackbarService);
-
-  protected employeeForm!: FormGroup<EmployeeForm>;
-  protected formTitle = 'Add';
-  protected submitted = false;
-  protected employeeId!: string;
   private destroyed$ = new ReplaySubject<void>(1);
-  cityList: City[] = [];
 
-  constructor() {
-    this.employeeService.getCityList().then((cities) => {
-      this.cityList = cities;
-    });
-
-    this.employeeForm = this.nonNullableFormBuilder.group({
+  protected employeeForm: FormGroup<EmployeeForm> =
+    this.nonNullableFormBuilder.group({
       name: ['', Validators.required],
       gender: ['', Validators.required],
       department: ['', Validators.required],
       city: ['', Validators.required],
     });
-  }
+  protected formTitle = 'Add';
+  protected submitted = false;
+  protected employeeId!: string;
+  protected cityList$ = this.employeeService.getCityList();
 
   ngOnInit(): void {
     this.activatedRoute.paramMap
@@ -92,6 +86,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
         .updateEmployee(this.employeeId, this.employeeForm.getRawValue())
         .then(
           () => {
+            this.employeeService.getAllEmployees();
             this.snackbarService.showSnackBar(
               'Employee data updated successfully.'
             );
@@ -104,6 +99,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
     } else {
       this.employeeService.saveEmployee(this.employeeForm.getRawValue()).then(
         () => {
+          this.employeeService.getAllEmployees();
           this.snackbarService.showSnackBar(
             'Employee data added successfully.'
           );
@@ -114,8 +110,6 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
         }
       );
     }
-
-    this.employeeService.getAllEmployees();
   }
 
   get employeeFormControl() {
