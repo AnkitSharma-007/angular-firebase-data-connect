@@ -13,6 +13,8 @@ import { SnackbarService } from '../services/snackbar.service';
 import { EMPTY, ReplaySubject, switchMap, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +29,7 @@ import { RouterModule } from '@angular/router';
     MatDialogModule,
     MatButtonModule,
     RouterModule,
+    AsyncPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -47,6 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private readonly employeeService = inject(EmployeeService);
   private readonly snackbarService = inject(SnackbarService);
+  private readonly authService = inject(AuthService);
   private readonly dialog = inject(MatDialog);
   private destroyed$ = new ReplaySubject<void>(1);
 
@@ -58,6 +62,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     'operation',
   ];
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource();
+
+  readonly appUser$ = this.authService.appUser$;
 
   ngOnInit(): void {
     this.getEmployeeData();

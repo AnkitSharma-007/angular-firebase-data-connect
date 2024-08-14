@@ -23,7 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class NavBarComponent {
   private readonly authService = inject(AuthService);
-  appUser$ = this.authService.appUser$;
+  readonly appUser$ = this.authService.appUser$;
 
   userLogin() {
     this.authService.login();

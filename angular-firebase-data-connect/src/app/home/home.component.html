@@ -43,16 +43,24 @@
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef>Operation</th>
             <td mat-cell *matCellDef="let row">
+              @if({appUser:appUser$ | async}; as userData) {
               <button
                 mat-icon-button
                 color="primary"
                 [routerLink]="['employee/edit/', row.id]"
+                [disabled]="userData.appUser == null"
               >
                 <mat-icon aria-label="Edit">edit</mat-icon>
               </button>
-              <button mat-icon-button color="warn" (click)="deleteConfirm(row)">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteConfirm(row)"
+                [disabled]="userData.appUser == null"
+              >
                 <mat-icon aria-label="Delete">delete</mat-icon>
               </button>
+              }
             </td>
           </ng-container>
 

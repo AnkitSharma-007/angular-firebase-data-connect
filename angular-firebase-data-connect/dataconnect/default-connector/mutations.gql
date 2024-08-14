@@ -1,11 +1,9 @@
-# # Example mutations for a simple email app
-
 mutation createEmployee(
   $name: String!
   $city: String!
   $department: String!
   $gender: String!
-) @auth(level: PUBLIC) {
+) @auth(level: USER) {
   employee_insert(
     data: { name: $name, city: $city, department: $department, gender: $gender }
   )
@@ -17,13 +15,13 @@ mutation updateEmployee(
   $city: String!
   $department: String!
   $gender: String!
-) @auth(level: PUBLIC) {
+) @auth(level: USER) {
   employee_update(
     id: $id
     data: { name: $name, city: $city, department: $department, gender: $gender }
   )
 }
 
-mutation deleteEmployee($id: UUID!) @auth(level: PUBLIC) {
+mutation deleteEmployee($id: UUID!) @auth(level: USER) {
   employee_delete(id: $id)
 }

@@ -1,13 +1,11 @@
-# # Example queries for a simple email app.
-
-query ListCities @auth(level: PUBLIC) {
+query ListCities {
   cities {
     id
     cityName
   }
 }
 
-query ListEmployees @auth(level: PUBLIC) {
+query ListEmployees {
   employees(orderBy: [{ name: ASC }]) {
     id
     name
@@ -17,7 +15,7 @@ query ListEmployees @auth(level: PUBLIC) {
   }
 }
 
-query ListEmployeeByID($uid: UUID) @auth(level: PUBLIC) {
+query ListEmployeeByID($uid: UUID) {
   employees(where: { id: { eq: $uid } }) {
     id
     name
