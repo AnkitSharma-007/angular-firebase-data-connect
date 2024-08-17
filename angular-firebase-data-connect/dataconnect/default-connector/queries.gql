@@ -1,11 +1,11 @@
-query ListCities {
+query ListCities @auth(level: PUBLIC) {
   cities {
     id
     cityName
   }
 }
 
-query ListEmployees {
+query ListEmployees @auth(level: PUBLIC) {
   employees(orderBy: [{ name: ASC }]) {
     id
     name
@@ -15,7 +15,7 @@ query ListEmployees {
   }
 }
 
-query ListEmployeeByID($uid: UUID) {
+query ListEmployeeByID($uid: UUID) @auth(level: PUBLIC) {
   employees(where: { id: { eq: $uid } }) {
     id
     name
